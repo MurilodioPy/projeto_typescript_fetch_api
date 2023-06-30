@@ -1,0 +1,27 @@
+{
+  "name": "projeto_typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start-dev": "nodemon ./src/app.ts",
+    "start": "ts-node ./src/app.ts",
+    "typescript": "tsc",
+    "build": "rm -rf dist/ ",
+    "test": "echo \"Teste com o comando\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/jquery": "^3.5.16",
+    "@types/node": "^20.3.2",
+    "@types/node-fetch": "^2.6.4",
+    "express": "^4.18.2",
+    "ts-node": "^10.9.1"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.1"
+  }
+}

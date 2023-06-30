@@ -1,2 +1,1 @@
-# projeto_typescrypt_fetch_api
- 
+# projeto_typescrypt_fetch_API

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/app.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Projeto consumindo API com TypeScript</title>
+  </head>
+  <body>
+    <script>
+      var exports = {};
+    </script>
+    <header>
+      <h1>Fetch API de citações com TypeScript/Node</h1>
+    </header>
+    <main>
+      <div id="inputid">
+        <div id="label">
+          <label>Procure uma citação (1-100):</label>
+        </div>
+        <input
+          type="number"
+          name="id"
+          id="idquote"
+          onkeyup="buscaPorId()"
+          onchange="buscaPorId()"
+          placeholder="87 - Martin Luther King Jr"
+        />
+      </div>
+      <div id="subtitulo">
+        <h2>Citação:</h2>
+      </div>
+      <div id="blocoresultado">
+        <img id="imglivro" src="./src/img/livro.png" alt="livro aberto">
+        <p id="numero"></p>
+        <p id="citacao"></p>
+        <p id="nomeautor"></p>
+      </div>
+    </main>
+    <footer>
+      <p> Murilo Gonçalves Dionísio - ADS - 2023</p>
+      <p>&copy; Todos os direitos reservados.</p>
+    </footer>
+    <script src="./dist/execute.js"></script>
+  </body>
+</html>
