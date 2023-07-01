@@ -116,7 +116,7 @@ main {
   margin: 10px;
 }
 
-#blocobutton{
+.blocobutton{
   display: flex;
   justify-content:center;
   text-align: center;

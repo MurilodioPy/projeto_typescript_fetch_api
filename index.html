@@ -20,10 +20,19 @@
       <h1>Fetch API de citações com TypeScript/Node</h1>
     </header>
     <main id="principal">
+      <label>Procure por ID (1-100):</label>
+      <input
+            type="number"
+            name="id"
+            id="idquote"
+            onkeyup="buscaPorId()"
+            onchange="buscaPorId()"
+            placeholder="87 - Martin Luther King Jr"
+          />
       <div id="bloco">
         <div class="blocoparte">
           <label>Procure parte da citação:</label>
-          <label>Procure uma citação (1-100):</label>
+          <label>Procure uma citação por Autor:</label>
         </div>
         <div class="blocoparte">
           <input
@@ -33,19 +42,19 @@
             placeholder="success"
           />
           <input
-            type="number"
-            name="id"
-            id="idquote"
-            onkeyup="buscaPorId()"
-            onchange="buscaPorId()"
-            placeholder="87 - Martin Luther King Jr"
+            type="text"
+            name="buscaautor"
+            id="buscaautor"
+            placeholder="Martin Luther King Jr"
           />
         </div>
         <div class="blocoparte">
-          <div id="blocobutton">
+          <div class="blocobutton">
             <button class="button" type="button" onclick="buscaPorTexto()">Buscar</button>
           </div>
-          <div id="right-column"></div>
+          <div class="blocobutton">
+            <button class="button" type="button" onclick="buscaPorAutor()">Buscar</button>
+          </div>
         </div>
       </div>
       

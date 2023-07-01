@@ -14,13 +14,35 @@ const main = document.getElementById("principal");
 let stopfor = false;
 let run = false;
 const getByTexto = (texto, handle) => __awaiter(void 0, void 0, void 0, function* () {
-    for (let n = 1; n < 100; n++) {
+    for (let n = 1; n <= 100; n++) {
         progressoBusca(n);
         try {
             let res = yield fetch(`${API_QUOTES_HOST}/${n}`);
             let obj = yield res.json();
             if (obj.quote.toLowerCase().includes(texto.toLowerCase())) {
                 handle(obj);
+                console.log(obj);
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+        if (stopfor) {
+            break;
+        }
+        run = true;
+    }
+    run = false;
+});
+const getByAuthor = (texto, handle) => __awaiter(void 0, void 0, void 0, function* () {
+    for (let n = 1; n <= 100; n++) {
+        progressoBusca(n);
+        try {
+            let res = yield fetch(`${API_QUOTES_HOST}/${n}`);
+            let obj = yield res.json();
+            if (obj.author.toLowerCase().includes(texto.toLowerCase())) {
+                handle(obj);
+                console.log(obj);
             }
         }
         catch (error) {
@@ -125,5 +147,14 @@ const buscaPorTexto = () => {
         const texto = textoprocurado.value;
         if (texto != "")
             getByTexto(texto, handlePorTexto);
+    }
+};
+const buscaPorAutor = () => {
+    stopfor = false;
+    if (!run) {
+        const textoprocurado = document.getElementById("buscaautor");
+        const texto = textoprocurado.value;
+        if (texto != "")
+            getByAuthor(texto, handlePorTexto);
     }
 };
