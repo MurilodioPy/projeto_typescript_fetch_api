@@ -21,7 +21,6 @@ const getByTexto = (texto, handle) => __awaiter(void 0, void 0, void 0, function
             let obj = yield res.json();
             if (obj.quote.toLowerCase().includes(texto.toLowerCase())) {
                 handle(obj);
-                console.log(obj);
             }
         }
         catch (error) {
@@ -42,7 +41,6 @@ const getByAuthor = (texto, handle) => __awaiter(void 0, void 0, void 0, functio
             let obj = yield res.json();
             if (obj.author.toLowerCase().includes(texto.toLowerCase())) {
                 handle(obj);
-                console.log(obj);
             }
         }
         catch (error) {

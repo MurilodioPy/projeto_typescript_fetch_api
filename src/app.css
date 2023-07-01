@@ -124,10 +124,6 @@ main {
   width: 50%;
 }
 
-#right-column{
-  width: 50%;
-}
-
 .label {
   display: flex;
   justify-content: space-around;
