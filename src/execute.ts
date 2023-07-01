@@ -90,7 +90,7 @@ const handlePorId = (id: Quote) => {
   }
 };
 
-getById(87, handlePorId);//Martin Luther King Jr.
+getById(87, handlePorId);//faz uma busca por id da citação de Martin Luther King Jr.
 
 const buscaPorId = (): void => {
   const idquote = document.getElementById("idquote") as HTMLInputElement;
