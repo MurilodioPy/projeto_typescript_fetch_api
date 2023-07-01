@@ -23,9 +23,9 @@ const getById = async (id: number, handle: Function): Promise<void> => {
   }
 };
 
-const getByAutor = async (author: string, handle: Function): Promise<void> => {
+const getByTexto = async (texto: string, handle: Function): Promise<void> => {
   try {
-    let res = await fetch(`${API_QUOTES_HOST}/${author}`);
+    let res = await fetch(`${API_QUOTES_HOST}/${texto}`);
     let obj = await res.json();
     handle(obj);
     //console.log(obj);
@@ -38,8 +38,8 @@ const handlePorId = (id: number) => {
   console.log(id);
 };
 
-const handlePorAutor = (author: string) => {
-  console.log(author);
+const handlePorTexto = (texto: string) => {
+  console.log(texto);
 };
 
 function print(data: Quote): void {
@@ -48,4 +48,4 @@ function print(data: Quote): void {
 
 getAll(print);
 
-export { getAll, getById, getByAutor }; //buscar calback hell imagens
+export { getAll, getById, getByTexto as getByAutor }; //buscar calback hell imagens

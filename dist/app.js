@@ -33,9 +33,9 @@ const getById = (id, handle) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getById = getById;
-const getByAutor = (author, handle) => __awaiter(void 0, void 0, void 0, function* () {
+const getByTexto = (texto, handle) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let res = yield fetch(`${API_QUOTES_HOST}/${author}`);
+        let res = yield fetch(`${API_QUOTES_HOST}/${texto}`);
         let obj = yield res.json();
         handle(obj);
         //console.log(obj);
@@ -44,12 +44,12 @@ const getByAutor = (author, handle) => __awaiter(void 0, void 0, void 0, functio
         console.log(error);
     }
 });
-exports.getByAutor = getByAutor;
+exports.getByAutor = getByTexto;
 const handlePorId = (id) => {
     console.log(id);
 };
-const handlePorAutor = (author) => {
-    console.log(author);
+const handlePorTexto = (texto) => {
+    console.log(texto);
 };
 function print(data) {
     console.log(data);

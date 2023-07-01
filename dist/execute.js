@@ -10,20 +10,31 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const API_QUOTES_HOST = "https://dummyjson.com/quotes";
-const getByAutor = (author, handle) => __awaiter(void 0, void 0, void 0, function* () {
+const main = document.getElementById("principal");
+let stopfor = false;
+const getByTexto = (texto, handle) => __awaiter(void 0, void 0, void 0, function* () {
     for (let n = 1; n < 100; n++) {
+        progressoBusca(n);
         try {
             let res = yield fetch(`${API_QUOTES_HOST}/${n}`);
             let obj = yield res.json();
-            if (author == obj.author)
+            if (obj.quote.toLowerCase().includes(texto.toLowerCase())) {
                 handle(obj);
-            //console.log(obj);
+            }
         }
         catch (error) {
             console.log(error);
         }
+        if (stopfor) {
+            break;
+        }
     }
 });
+function progressoBusca(atual) {
+    const barra = document.querySelector('.progresso');
+    console.log();
+    barra.style.width = atual + '%';
+}
 const getById = (id, handle) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let res = yield fetch(`${API_QUOTES_HOST}/${id}`);
@@ -37,36 +48,48 @@ const getById = (id, handle) => __awaiter(void 0, void 0, void 0, function* () {
 function print(data) {
     console.log(data);
 }
-const handlePorAutor = (author) => {
+const criaBlocoResultado = (id, texto, nomeautor) => {
+    const quoteResult = document.createElement("div");
+    quoteResult.classList.add("blocoresultado");
+    const citacao = document.createElement("p");
+    citacao.classList.add("citacao");
+    const numero = document.createElement("p");
+    numero.classList.add("numero");
+    const autor = document.createElement("p");
+    autor.classList.add("nomeautor");
+    citacao.innerHTML = `${texto}`;
+    numero.innerHTML = `${id}`;
+    autor.innerHTML = `"${nomeautor}"`;
+    quoteResult.appendChild(numero);
+    quoteResult.appendChild(citacao);
+    quoteResult.appendChild(autor);
+    main.appendChild(quoteResult);
+};
+const criaBlocoErro = () => {
+    const quoteResult = document.createElement("div");
+    quoteResult.classList.add("blocoresultado");
+    const citacao = document.createElement("p");
+    citacao.classList.add("citacao");
+    citacao.innerHTML = "Nenhuma citação encontrada com o ID fornecido.";
+};
+const handlePorTexto = (texto) => {
     //console.log(author);
-    const numero = document.getElementById("numero");
-    const citacao = document.getElementById("citacao");
-    const autor = document.getElementById("nomeautor");
-    if (author != undefined) {
-        citacao.innerHTML += `${author.quote}`;
-        numero.innerHTML += `${author.id}`;
-        autor.innerHTML += `"${author.author}"`;
+    if (texto != undefined) {
+        criaBlocoResultado(texto.id, texto.quote, texto.author);
     }
     else {
-        citacao.innerHTML = "Nenhuma citação encontrada com o ID fornecido.";
-        numero.innerHTML = ``;
-        autor.innerHTML = ``;
+        limpaTexto();
+        criaBlocoErro();
     }
 };
 const handlePorId = (id) => {
     //console.log(id);
-    const numero = document.getElementById("numero");
-    const citacao = document.getElementById("citacao");
-    const autor = document.getElementById("nomeautor");
     if (id.id != undefined) {
-        citacao.innerHTML = `"${id.quote}"`;
-        numero.innerHTML = `${id.id}`;
-        autor.innerHTML = `- ${id.author}`;
+        criaBlocoResultado(id.id, id.quote, id.author);
     }
     else {
-        citacao.innerHTML = "Nenhuma citação encontrada com o ID fornecido.";
-        numero.innerHTML = ``;
-        autor.innerHTML = ``;
+        limpaTexto();
+        criaBlocoErro();
     }
 };
 getById(87, handlePorId); //Martin Luther King Jr.
@@ -75,9 +98,27 @@ const buscaPorId = () => {
     const id = parseInt(idquote.value);
     getById(id, handlePorId);
 };
-const buscaPorAutor = () => {
-    const nomeautor = document.getElementById("autor");
-    const nome = nomeautor.value;
-    //console.log(nome);
-    getByAutor(nome, handlePorAutor);
+const limpaTexto = () => {
+    citacao.innerHTML = "";
+    numero.innerHTML = ``;
+    autor.innerHTML = ``;
+};
+const limparResultado = () => {
+    progressoBusca(0);
+    stopfor = true;
+    const divs = document.getElementsByClassName("blocoresultado");
+    // Converte a coleção de elementos em um array para facilitar a iteração
+    const divsArray = Array.from(divs);
+    // Itera sobre os elementos e remove cada um
+    divsArray.forEach((div) => {
+        var _a;
+        (_a = div.parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(div);
+    });
+};
+const buscaPorTexto = () => {
+    stopfor = false;
+    const textoprocurado = document.getElementById("buscatexto");
+    const texto = textoprocurado.value;
+    if (texto != "")
+        getByTexto(texto, handlePorTexto);
 };
