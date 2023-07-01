@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const API_QUOTES_HOST = "https://dummyjson.com/quotes";
 const main = document.getElementById("principal");
 let stopfor = false;
+let run = false;
 const getByTexto = (texto, handle) => __awaiter(void 0, void 0, void 0, function* () {
     for (let n = 1; n < 100; n++) {
         progressoBusca(n);
@@ -28,12 +29,14 @@ const getByTexto = (texto, handle) => __awaiter(void 0, void 0, void 0, function
         if (stopfor) {
             break;
         }
+        run = true;
     }
+    run = false;
 });
 function progressoBusca(atual) {
-    const barra = document.querySelector('.progresso');
+    const barra = document.querySelector(".progresso");
     console.log();
-    barra.style.width = atual + '%';
+    barra.style.width = atual + "%";
 }
 const getById = (id, handle) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -57,9 +60,9 @@ const criaBlocoResultado = (id, texto, nomeautor) => {
     numero.classList.add("numero");
     const autor = document.createElement("p");
     autor.classList.add("nomeautor");
-    citacao.innerHTML = `${texto}`;
+    citacao.innerHTML = `"${texto}"`;
     numero.innerHTML = `${id}`;
-    autor.innerHTML = `"${nomeautor}"`;
+    autor.innerHTML = `- ${nomeautor}`;
     quoteResult.appendChild(numero);
     quoteResult.appendChild(citacao);
     quoteResult.appendChild(autor);
@@ -92,7 +95,7 @@ const handlePorId = (id) => {
         criaBlocoErro();
     }
 };
-getById(87, handlePorId); //Martin Luther King Jr.
+getById(87, handlePorId); //faz uma busca por id da citação de Martin Luther King Jr.
 const buscaPorId = () => {
     const idquote = document.getElementById("idquote");
     const id = parseInt(idquote.value);
@@ -117,8 +120,10 @@ const limparResultado = () => {
 };
 const buscaPorTexto = () => {
     stopfor = false;
-    const textoprocurado = document.getElementById("buscatexto");
-    const texto = textoprocurado.value;
-    if (texto != "")
-        getByTexto(texto, handlePorTexto);
+    if (!run) {
+        const textoprocurado = document.getElementById("buscatexto");
+        const texto = textoprocurado.value;
+        if (texto != "")
+            getByTexto(texto, handlePorTexto);
+    }
 };

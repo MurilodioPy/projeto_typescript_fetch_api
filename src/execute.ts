@@ -2,7 +2,8 @@ import { Quote } from "./quotes";
 const API_QUOTES_HOST: string = "https://dummyjson.com/quotes";
 
 const main = document.getElementById("principal");
-let stopfor : boolean = false;
+let stopfor: boolean = false;
+let run: boolean = false;
 
 const getByTexto = async (texto: string, handle: Function): Promise<void> => {
   for (let n = 1; n < 100; n++) {
@@ -16,16 +17,18 @@ const getByTexto = async (texto: string, handle: Function): Promise<void> => {
     } catch (error) {
       console.log(error);
     }
-    if(stopfor){
+    if (stopfor) {
       break;
     }
+    run = true;
   }
+  run = false;
 };
 
 function progressoBusca(atual: number) {
-  const barra = document.querySelector('.progresso') as HTMLElement;
-  console.log()
-  barra.style.width = atual + '%';
+  const barra = document.querySelector(".progresso") as HTMLElement;
+  console.log();
+  barra.style.width = atual + "%";
 }
 
 const getById = async (id: number, handle: Function): Promise<void> => {
@@ -52,9 +55,9 @@ const criaBlocoResultado = (id: number, texto: string, nomeautor: string) => {
   const autor = document.createElement("p");
   autor.classList.add("nomeautor");
 
-  citacao.innerHTML = `${texto}`;
+  citacao.innerHTML = `"${texto}"`;
   numero.innerHTML = `${id}`;
-  autor.innerHTML = `"${nomeautor}"`;
+  autor.innerHTML = `- ${nomeautor}`;
 
   quoteResult.appendChild(numero);
   quoteResult.appendChild(citacao);
@@ -90,7 +93,7 @@ const handlePorId = (id: Quote) => {
   }
 };
 
-getById(87, handlePorId);//faz uma busca por id da citação de Martin Luther King Jr.
+getById(87, handlePorId); //faz uma busca por id da citação de Martin Luther King Jr.
 
 const buscaPorId = (): void => {
   const idquote = document.getElementById("idquote") as HTMLInputElement;
@@ -121,10 +124,12 @@ const limparResultado = () => {
 
 const buscaPorTexto = (): void => {
   stopfor = false;
-  const textoprocurado = document.getElementById(
-    "buscatexto"
-  ) as HTMLInputElement;
+  if (!run) {
+    const textoprocurado = document.getElementById(
+      "buscatexto"
+    ) as HTMLInputElement;
 
-  const texto = textoprocurado.value;
-  if (texto != "") getByTexto(texto, handlePorTexto);
+    const texto = textoprocurado.value;
+    if (texto != "") getByTexto(texto, handlePorTexto);
+  }
 };
