@@ -7,7 +7,7 @@
     "start-dev": "nodemon ./src/app.ts",
     "start": "ts-node ./src/app.ts",
     "typescript": "tsc",
-    "build": "rm -rf dist/ ",
+    "build": "tsc",
     "test": "echo \"Teste com o comando\" && exit 1"
   },
   "keywords": [],
